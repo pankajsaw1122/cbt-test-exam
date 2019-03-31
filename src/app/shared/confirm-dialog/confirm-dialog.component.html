@@ -1,0 +1,26 @@
+<mat-card class="confirm-card">
+  <mat-card-header>
+    <mat-card-title>Confirmation</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="container">
+      <p>
+        {{confirmMessage}}
+      </p>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="button-place">
+    <button mat-raised-button color="warn" (click)="dialogRef.close(true)">Yes</button>
+    <button mat-raised-button (click)="dialogRef.close(false)">No</button>
+  </mat-card-actions>
+</mat-card>
+
+
+<!-- <div id="confirm-box-container">
+    <h1 class="confirm-box-heading" matDialogTitle>Delete</h1>
+    <div mat-dialog-content>{{confirmMessage}}</div>
+    <div mat-dialog-actions class="pt-24">
+        <button mat-raised-button class="mat-accent mr-16 yes-button" (click)="dialogRef.close(true)">Yes</button>
+        <button mat-button (click)="dialogRef.close(false)">No</button>
+    </div>
+</div> -->

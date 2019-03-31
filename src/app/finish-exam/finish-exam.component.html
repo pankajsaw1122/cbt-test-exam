@@ -1,0 +1,34 @@
+<div class="instructions-page" [@routerTransition]>
+  <mat-card class="details-card">
+    <mat-card-header>
+      <mat-card-title>Result</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Questions Attempted</th>
+            <th>Total Correct Answers</th>
+            <th>Positive Mark</th>
+            <th>Total Incorrect Answers</th>
+            <th>Negative Mark</th>
+            <th>Final Mark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{resultData.positiveCount + resultData.negCount}}</td>
+            <td>{{ resultData.positiveCount }}</td>
+            <td>{{ resultData.positiveMark }}</td>
+            <td>{{ resultData.negCount }}</td>
+            <td> {{ resultData.negMark }}</td>
+            <td> {{ resultData.finalExamMark }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <div class="exit-btn-sect">
+    <p> !Exam finished Please close the browser</p>
+  </div>
+</div>

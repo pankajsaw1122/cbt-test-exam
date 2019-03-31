@@ -1,0 +1,53 @@
+.info-bar {
+    padding: 8px;
+    background: #17a2b8;
+    color: white;
+    border-radius: 32px;
+}
+
+.ques-text {
+    display: block;
+    margin: 4px;
+    padding: 24px;
+    // border: 2px solid grey;
+}
+
+.option-section {
+    display: block;
+    padding: 12px;
+    margin-top: 8px;
+}
+
+.opt-text {
+    display: block;
+}
+.prev-btn {
+    adding: 2px;
+    min-width: 80px;
+    background: #ffc107;
+    margin: 12px;
+}
+.next-btn {
+    padding: 2px;
+    min-width: 80px;
+    background: #17a2b8;
+    margin: 12px;
+}
+.clear-btn {
+    padding: 2px;
+    min-width: 80px;
+    background: rgba(0,0,0,.54);
+    margin: 12px;
+}
+.finish-btn {
+    float: right;
+    margin: 12px;
+    background: #f44336ba;
+}
+.save-next {
+    float: right;
+    margin: 12px;
+    // padding: 4px;
+    min-width: 180px;
+    background: #28a745;
+}

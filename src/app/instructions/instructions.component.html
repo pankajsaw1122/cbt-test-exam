@@ -1,0 +1,69 @@
+<div class="instructions-page" [@routerTransition]>
+    <mat-card class="details-card">
+        <mat-card-header>
+          <mat-card-title>Candidate Detail</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Roll No</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ userData.name }}</td>
+                    <td>{{ userData.class }}</td>
+                    <td>{{ userData.roll }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </mat-card-content>
+      </mat-card>
+  <div class="row">
+    <div class="container-fluid">
+      <div class="marg">
+        <div class="card marg">
+          <div class="card-header">Important Instructions </div>
+          <div class="card-body">
+            <div class="inst-text">
+              <p> i)
+                Use of mobile phone, calculator and other electronic gadgets and their accessories is not permitted.
+                Therefore,
+                these should not, be brought inside the Examination Premises / Venue.
+              </p>
+              <p>
+
+                ii) Candidature of any candidate found to possess mobile phones or any other means of wireless
+                communication
+                or
+                related accessories either in working or switched off mode, shall be cancelled forthwith. This will also
+                invite
+                further penal action as per the policy of the Commission.
+              </p>
+              <p>
+                iii) The Candidates are advised to desist from use of any unfair method in the examination hall which
+                will
+                render
+                them ineligible for further consideration for the examination and also lead to their debarment from
+                Commission’s
+                examinations in future beside inviting criminal prosecution.
+
+              </p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="start-btn">
+              <button mat-raised-button (click)="startExam()" color="primary">Start Exam</button>
+              <p *ngIf="errorMessage == 1"> {{ errorText }} </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

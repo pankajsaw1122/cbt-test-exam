@@ -1,0 +1,99 @@
+<div class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+  <!-- <div class="person-icon">
+      <mat-icon class="assign-icon">assignment</mat-icon>
+  </div> -->
+  <div class="exam-info">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Exam Name</td>
+          <td>{{examData.exam_name}}</td>
+        </tr>
+        <tr>
+          <td>Exam Minute</td>
+          <td>{{examData.exam_minute}}</td>
+        </tr>
+        <tr>
+          <td>Total Marks</td>
+          <td>{{examData.total_marks}}</td>
+        </tr>
+        <tr>
+          <td>Total Questions</td>
+          <td>{{examData.total_ques}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<div class="ques-numbers">
+  <div class="pad-4">
+    Questions
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-3 q-pad">
+        <button mat-mini-fab [ngClass]="'btn1-class'" >P</button>
+      </div>
+      <div class="col-3 q-pad">
+        <button mat-mini-fab >02</button>
+      </div>
+      <div class="col-3 q-pad">
+        <button mat-mini-fab></button>
+      </div>
+      <div class="col-3 q-pad">
+        <button mat-mini-fab ></button>
+      </div>
+      <div class="col-3 q-pad">
+        <button mat-mini-fab>05</button>
+      </div>
+      <div class="col-3 q-pad">
+        <button mat-mini-fab >03</button>
+      </div>
+      <div class="col-3 q-pad">
+        <button mat-mini-fab>Primary</button>
+      </div>
+      <div class="col-3 q-pad">
+        <button mat-mini-fab>Primary</button>
+      </div>
+      <div class="col-3 q-pad">
+        <button mat-mini-fab>Primary</button>
+      </div>
+      <div class="col-3 q-pad">
+        <button mat-mini-fab>Primary</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+
+  <!-- <mat-nav-list role="navigation">
+    <a mat-list-item routerLink="/dashboard" [routerLinkActive]="['router-link-active']">
+      <mat-icon>dashboard</mat-icon>
+      &nbsp;&nbsp; Dashboard
+    </a>
+  </mat-nav-list>
+  <mat-nav-list role="navigation">
+    <a mat-list-item routerLink="/exam" [routerLinkActive]="['router-link-active']">
+      <mat-icon>assignment</mat-icon>
+      &nbsp;&nbsp; Exam
+    </a>
+  </mat-nav-list>
+  <mat-nav-list role="navigation">
+    <a mat-list-item routerLink="/categories" [routerLinkActive]="['router-link-active']">
+      <mat-icon>table_chart</mat-icon>
+      &nbsp;&nbsp; Categories
+    </a>
+  </mat-nav-list>
+  <mat-nav-list role="navigation">
+    <a mat-list-item routerLink="/questions" [routerLinkActive]="['router-link-active']">
+      <mat-icon>help</mat-icon>
+      &nbsp;&nbsp; Questions
+    </a>
+  </mat-nav-list> -->
+</div>

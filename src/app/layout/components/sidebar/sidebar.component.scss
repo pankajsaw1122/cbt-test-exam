@@ -1,0 +1,185 @@
+$topnav-background-color: #222;
+.sidebar {
+    border-radius: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 56px;
+    right: 0px;
+    width: 300px;
+    margin-left: -300px;
+    background-color: white;
+    border: none;
+    border-radius: 0;
+    overflow-y: auto;
+    bottom: 0;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    // border-top: 1px solid rgba(255,255,255,0.3);
+    // .list-group {
+    //     a.list-group-item {
+    //         background: $topnav-background-color;
+    //         border: 0;
+    //         border-radius: 0;
+    //         color: #999;
+    //         text-decoration: none;
+    //         .fa {
+    //             margin-right: 10px;
+    //         }
+    //     }
+    //     a:hover {
+    //         background: darken($topnav-background-color, 5%);
+    //         color: #fff;
+    //     }
+    //     a.router-link-active {
+    //         background: darken($topnav-background-color, 5%);
+    //         color: #fff;
+    //     }
+    //     .header-fields {
+    //         padding-top: 10px;
+    //         >.list-group-item:first-child {
+    //             border-top: 1px solid rgba(255, 255, 255, 0.2);
+    //         }
+    //     }
+    // }
+}
+
+.exam-info {
+    padding: 4px;
+}
+.ques-numbers {
+    display: none;
+}
+.pad-4 {
+    display: block;
+    margin: auto;
+    margin-bottom: 8px;
+    text-align: center;
+    text-decoration: underline;
+}
+.q-pad {
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+.person-icon {
+    
+}
+.btn1-class {
+    background: grey !important;
+}
+.assign-icon {
+    font-size: 120px;
+    height: 120px;
+    width: 120px;
+}
+
+// .nested-menu {
+//     .list-group-item {
+//         cursor: pointer;
+//     }
+//     .nested {
+//         list-style-type: none;
+//     }
+//     ul.submenu {
+//         display: none;
+//         height: 0;
+//     }
+//     & .expand {
+//         ul.submenu {
+//             display: block;
+//             list-style-type: none;
+//             height: auto;
+//             li {
+//                 a {
+//                     color: #fff;
+//                     padding: 10px;
+//                     display: block;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// @media screen and (max-width: 992px) {
+//     .sidebar {
+//         top: 54px;
+//         left: 0px;
+//     }
+// }
+
+// @media (min-width: 992px) {
+//     .header-fields {
+//         display: none;
+//     }
+// }
+
+// ::-webkit-scrollbar {
+//     width: 8px;
+// }
+
+// ::-webkit-scrollbar-track {
+//     -webkit-box-shadow: inset 0 0 0px rgba(255, 255, 255, 1);
+//     border-radius: 3px;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//     border-radius: 3px;
+//     -webkit-box-shadow: inset 0 0 3px rgba(255, 255, 255, 1);
+// }
+
+// mat-nav-list mat-list-item mat-list-item-content {
+//     display: block;
+//     padding: none;
+//     align-items: center;
+//     box-sizing: border-box;
+//     position: relative;
+//     height: inherit;
+// }
+
+// .mat-nav-list .mat-list-item {
+//     color: rgba(78, 78, 78, 0.87);
+//     font-size: 12px;
+//     font-weight: bold;
+// }
+
+// .mat-expansion-panel:not([class*=mat-elevation-z]) {
+//     box-shadow: none;
+// }
+
+// .mat-expansion-panel-header-title {
+//     color: rgba(90, 90, 90, 0.87);
+//     font-size: 12px;
+//     font-weight: bold;
+// }
+
+// .mat-expansion-panel-header {
+//     padding: 0 12px;
+// }
+
+// .list-font {
+//     font-size: 12px;
+// }
+
+// .mat-icon-custom {
+//     font-size: 18px;
+//     height: 18px;
+//     width: 18px;
+// }
+
+// .mat-icon {
+//     background-repeat: no-repeat;
+//     display: inline-block;
+//     fill: currentColor;
+//     height: 28px;
+//     width: 24px;
+//     /* margin-bottom: 8px; */
+// }
+
+// .expand-button {
+//     padding-top: 4px;
+// }

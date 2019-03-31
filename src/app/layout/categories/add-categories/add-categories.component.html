@@ -1,0 +1,82 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="pageHeading" [icon]="'fa-edit'"></app-page-header>
+    <div class="row form-outer">
+      <div class="card">
+        <div class="card-header">
+          {{ pageHeading }}
+        </div>
+        <div class="card-block">
+          <form [formGroup]="categForm" (ngSubmit)="onSubmit()" class="form-size">
+            <div class="Container fluid">
+              <div class="row form-inner">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Exam</mat-label>
+                      <mat-select [(value)]="categForm.value.examId" formControlName="examId">
+                        <mat-option *ngFor="let exam of examData" [value]="exam.id">{{exam.exam_name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!categForm.get('examId').valid && categForm.get('examId').touched">
+                        <span *ngIf="categForm.get('examId').errors['required']">Please select Exam</span>
+                      </span>
+                    </mat-error>
+                  </div>
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Total questions Number</mat-label>
+                      <input type="number" matInput formControlName="totalQues">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!categForm.get('totalQues').valid && categForm.get('totalQues').touched">
+                        <span *ngIf="categForm.get('totalQues').errors['required']">Please enter total question number
+                        </span>
+                      </span>
+                    </mat-error>
+                  </div>
+  
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Category Name</mat-label>
+                      <input type="text" matInput formControlName="categName">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!categForm.get('categName').valid && categForm.get('categName').touched">
+                        <span *ngIf="categForm.get('categName').errors['required']">Please enter Category name
+                        </span>
+                      </span>
+                    </mat-error>
+                  </div>
+  
+                  <div class="form-group">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Total Marks</mat-label>
+                        <input type="number" matInput formControlName="totalMarks">
+                      </mat-form-field>
+                      <mat-error>
+                        <span *ngIf="!categForm.get('totalMarks').valid && categForm.get('totalMarks').touched">
+                          <span *ngIf="categForm.get('totalMarks').errors['required']">Please enter student name
+                          </span>
+                        </span>
+                      </mat-error>
+                    </div>
+                </div>
+              </div>
+              <div class="button-row">
+                <button mat-raised-button [disabled]="!categForm.valid" color="primary">{{ btnText }}</button> &nbsp;&nbsp;
+                <!-- [disabled]="!categForm.valid" -->
+                <button routerLink="/categories" mat-raised-button color="warn">Cancel</button>
+                <p *ngIf="submitSuccess == 1" class="success">{{ successMsg }}</p>
+                <p *ngIf="submitSuccess == 0" class="failed"> Failed to submit data please try again later</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+  

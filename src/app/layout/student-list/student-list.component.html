@@ -1,0 +1,71 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Student List'" [icon]="'fa-edit'"></app-page-header>
+    <div class="row form-outer">
+        <div class="card">
+            <div class="card-header">
+                Student List
+            </div>
+            <div class="card-block">
+                <form class="form-size">
+                    <div class="Container fluid">
+                        <div class="row form-inner">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Student List by Board" [(ngModel)] = "board" name = "board" (change)="getListOfStudent($event)">
+                                            <mat-option value="">Select</mat-option>
+                                            <mat-option value="ICSE">ICSE</mat-option>
+                                            <mat-option value="CBSE">CBSE</mat-option>
+                                            <mat-option value="State Board">State Board</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-select [(ngModel)] = "student_class" name = "student_class" (change)="getListOfStudent($event)" placeholder="Filter Student List by Class">
+                                            <mat-option value="">Select</mat-option>
+                                            <mat-option value="IIX">IIX</mat-option>
+                                            <mat-option value="IX">IX</mat-option>
+                                            <mat-option value="X">X</mat-option>
+                                            <mat-option value="XI">XI</mat-option>
+                                            <mat-option value="XII">XII</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-select [(ngModel)] = "student_session" name = "student_session" (change)="getListOfStudent($event)" placeholder="Filter Student List by Session">
+                                            <mat-option value="">Select</mat-option>
+                                            <mat-option value="2018-2019">2018-2019</mat-option>
+                                            <mat-option value="2019-2020">2019-2020</mat-option>
+                                            <mat-option value="2020-2021">2020-2021</mat-option>
+                                            <mat-option value="2021-2022">2021-2022</mat-option>
+                                            <mat-option value="2022-2023">2022-2023</mat-option>
+                                            <mat-option value="2023-2024">2023-2024</mat-option>
+                                            <mat-option value="2024-2025">2024-2025</mat-option>
+                                            <mat-option value="2025-2026">2025-2026</mat-option>
+                                            <mat-option value="2026-2027">2026-2027</mat-option>
+                                            <mat-option value="2027-2028">2027-2028</mat-option>
+                                            <mat-option value="2028-2029">2028-2029</mat-option>
+                                            <mat-option value="2029-2030">2029-2030</mat-option>
+                                            <mat-option value="2030-2031">2030-2031</mat-option>
+                                            <mat-option value="2031-2032">2031-2032</mat-option>
+                                            <mat-option value="2032-2033">2032-2033</mat-option>
+                                            <mat-option value="2033-2034">2033-2034</mat-option>
+                                            <mat-option value="2034-2035">2034-2035</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>

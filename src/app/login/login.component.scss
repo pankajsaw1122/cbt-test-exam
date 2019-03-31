@@ -1,0 +1,72 @@
+:host {
+    display: block;
+}
+
+.login-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-image: url('../../assets/images/books-bg.jpg');
+    background-size: cover;
+    text-align: center;
+}
+.top-pad {
+    padding-top: 8%;
+}
+
+.bg-overlay {
+    position: fixed;
+    background-color: rgba(105, 105, 105, 0.38);
+    width: 100%;
+    height: 100%;
+}
+
+.page-logo {
+    margin: auto;
+}
+
+.material-icons {
+    font-size: 80px;
+    height: 80px;
+    width: 80px;
+    color: #17a2b8;
+}
+
+.card-header {
+    background-color: #17a2b8;
+    color: #f8f9fa;
+    font-weight: bolder;
+}
+
+.mat-form-field {
+    width: 100%;
+
+}
+.mat-raised-button.mat-primary {
+    width: 220px;
+    background: #17a2b8;
+    padding: 4px;
+}
+.rounded-btn {
+    font-size: 18px;
+    line-height: 40px;
+    padding: 0 25px;
+    background: #17a2b8;
+    color: #f8f9fa;
+}
+
+.rounded-btn:hover,
+.rounded-btn:focus,
+.rounded-btn:active,
+.rounded-btn:visited {
+    color:black;
+    border: 2px solid black;
+    outline: none;
+}
+
+.col-md-4 {
+    margin: auto;
+}

@@ -1,0 +1,41 @@
+<div [@routerTransition]>
+  <div class="info-bar">
+    <span>Information : </span> &nbsp; <span *ngIf="quesData.ques_type_id == 1"> Question Type : Single Choice, </span> &nbsp;
+    <span *ngIf="quesData.ques_type_id == 2"> Question Type : Multiple Choice, </span>
+    <span> Positive Mark: {{quesData.marks}}, </span> &nbsp; <span> Negative Mark: {{quesData.neg_mark}} </span>
+  </div>
+  <div class="container-fluid">
+      <form [formGroup]="answerForm" class="form-size">
+    <div class="ques-text">
+      Q. {{index + 1}}) {{quesData.ques_text}}
+
+      <div *ngIf="quesData.ques_type_id == 1" class="ques-opt">
+        <mat-radio-group formControlName="choice_id_radio" class="option-section">
+          <mat-radio-button class="opt-text" *ngFor="let option of quesData.choiceData" [value]="option.choiceId">
+            {{option.choiceText}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div *ngIf="quesData.ques_type_id == 2" class="ques-opt">
+        <section class="option-section">
+          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox1" >{{quesData.choiceData[0].choiceText}}</mat-checkbox>
+          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox2" >{{quesData.choiceData[1].choiceText}}</mat-checkbox>
+          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox3" >{{quesData.choiceData[2].choiceText}}</mat-checkbox>
+          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox4" >{{quesData.choiceData[3].choiceText}}</mat-checkbox>
+
+        </section>
+      </div>
+    </div>
+    <div class="action-btn">
+    <button mat-flat-button color="primary" (click)="onPrev()" class="prev-btn">Previous</button>
+    <button mat-flat-button color="primary" (click)="onNext()" class="next-btn">Next</button>
+    <button mat-flat-button color="primary" (click)="onClear()" class="clear-btn">Clear</button>
+    <button mat-flat-button color="warn" class="finish-btn" (click)="finishExam()">Finish Exam</button>
+
+    <button mat-flat-button color="primary" class="save-next" (click)="onSubmit()">{{btnText}}</button>
+
+  </div>
+  </form>
+  </div>
+
+</div>
