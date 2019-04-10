@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import {throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -7,6 +7,14 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
+
+  onQuesLoad = new EventEmitter<any>();
+  onQuesClicked = new EventEmitter<number>();
+  onNextOrPrevClick = new EventEmitter<number>();
+  // onPrevClick = new EventEmitter<number>();
+  onAnswered = new EventEmitter<number>();
+  onClear = new EventEmitter<number>();
+
   private apiUrl = 'http://localhost:5000/';
 
   constructor(private http: HttpClient) {}

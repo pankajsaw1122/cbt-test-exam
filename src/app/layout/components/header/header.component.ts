@@ -12,7 +12,7 @@ import { CountdownComponent } from 'ngx-countdown';
 
 export class HeaderComponent implements OnInit {
   pushRightClass: string = 'push-right';
-  examName: String = '';
+  examName: string = '';
   examMinute: number;
 @ViewChild(CountdownComponent) counter: CountdownComponent;
   constructor(public router: Router, private apiService: ApiService) {
@@ -22,17 +22,14 @@ export class HeaderComponent implements OnInit {
     this.apiService
       .getExamData(sessionStorage.getItem('examId'))
       .subscribe((data: any) => {
-        console.log(data.data);
         if (data.status === 200 || data.status === '200') {
           this.examMinute = data.data[0].exam_minute * 60;
-          console.log(this.examMinute);
         }
       });
     this.examName = sessionStorage.getItem('exam_name');
   }
 
   onNotify(event: Event) {
-    console.log(event);
     this.router.navigate(['/finishexam']);
   }
  

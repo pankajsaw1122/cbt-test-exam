@@ -1,4 +1,4 @@
-<div class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+<div class="sidebar">
   <!-- <div class="person-icon">
       <mat-icon class="assign-icon">assignment</mat-icon>
   </div> -->
@@ -37,35 +37,12 @@
   <div class="container-fluid">
     <div class="row">
 
-      <div class="col-3 q-pad">
-        <button mat-mini-fab [ngClass]="'btn1-class'" >P</button>
-      </div>
-      <div class="col-3 q-pad">
-        <button mat-mini-fab >02</button>
-      </div>
-      <div class="col-3 q-pad">
-        <button mat-mini-fab></button>
-      </div>
-      <div class="col-3 q-pad">
-        <button mat-mini-fab ></button>
-      </div>
-      <div class="col-3 q-pad">
-        <button mat-mini-fab>05</button>
-      </div>
-      <div class="col-3 q-pad">
-        <button mat-mini-fab >03</button>
-      </div>
-      <div class="col-3 q-pad">
-        <button mat-mini-fab>Primary</button>
-      </div>
-      <div class="col-3 q-pad">
-        <button mat-mini-fab>Primary</button>
-      </div>
-      <div class="col-3 q-pad">
-        <button mat-mini-fab>Primary</button>
-      </div>
-      <div class="col-3 q-pad">
-        <button mat-mini-fab>Primary</button>
+      <div class="col-3 q-pad" *ngFor="let ques of quesList; let i = index">
+        <button mat-mini-fab  [ngClass]="{
+          'btn1-class': true,
+          'attempted': clickedQues[i],
+          'answered': answeredQues[i]
+        }" (click)="quesClicked(i)"><b>{{i+1}}</b></button>
       </div>
     </div>
   </div>

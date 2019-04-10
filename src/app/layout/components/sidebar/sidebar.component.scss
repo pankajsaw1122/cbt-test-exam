@@ -53,12 +53,13 @@ $topnav-background-color: #222;
     padding: 4px;
 }
 .ques-numbers {
-    display: none;
+    // display: none;
 }
+
 .pad-4 {
     display: block;
     margin: auto;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     text-align: center;
     text-decoration: underline;
 }
@@ -70,7 +71,18 @@ $topnav-background-color: #222;
     
 }
 .btn1-class {
-    background: grey !important;
+    background:#dee2e6 ;
+    outline: none;
+}
+.attempted {
+    background-color:#ffd740;
+    border: 2px slid blue;
+}
+.answered {
+    background-color:#33d65b;
+}
+.current-ques {
+    border: 2px solid blue;
 }
 .assign-icon {
     font-size: 120px;

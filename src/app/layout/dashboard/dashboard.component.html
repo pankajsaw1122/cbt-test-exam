@@ -27,8 +27,8 @@
       </div>
     </div>
     <div class="action-btn">
-    <button mat-flat-button color="primary" (click)="onPrev()" class="prev-btn">Previous</button>
-    <button mat-flat-button color="primary" (click)="onNext()" class="next-btn">Next</button>
+    <button mat-flat-button color="primary" (click)="onPrev()" [disabled]="prevDisable" class="prev-btn">Previous</button>
+    <button mat-flat-button color="primary" (click)="onNext()" [disabled]="nextDisable" class="next-btn">Next</button>
     <button mat-flat-button color="primary" (click)="onClear()" class="clear-btn">Clear</button>
     <button mat-flat-button color="warn" class="finish-btn" (click)="finishExam()">Finish Exam</button>
 
