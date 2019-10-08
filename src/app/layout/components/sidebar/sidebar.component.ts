@@ -1,13 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { ApiService } from "src/app/shared/services/api.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/shared/services/api.service';
 @Component({
-  selector: "app-sidebar",
-  templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.scss"]
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  pushRightClass: string = "push-right";
+  pushRightClass: string = 'push-right';
   // index = 1;
   quesList = [];
   clickedQues = [true];
@@ -15,10 +15,10 @@ export class SidebarComponent implements OnInit {
   // currentQues = [];
 
   examData = {
-    exam_name: "",
-    exam_minute: "",
-    total_marks: "",
-    total_ques: ""
+    exam_name: '',
+    exam_minute: '',
+    total_marks: '',
+    total_ques: ''
   };
 
   constructor(public router: Router, private apiService: ApiService) {}
@@ -27,7 +27,8 @@ export class SidebarComponent implements OnInit {
     this.apiService
       .getExamData(sessionStorage.getItem("examId"))
       .subscribe((data: any) => {
-        if (data.status === 200 || data.status === "200") {
+        if (data.status === 200 || data.status === '200') {
+          console.log(data.data[0]);
           this.examData = data.data[0];
           // this.examMinute = data.data[0].exam_minute * 60000
         }
@@ -46,7 +47,7 @@ export class SidebarComponent implements OnInit {
       console.log(index);
       this.answeredQues[index] = true;
       // this.clickedQues[index] = false;
-      if (index < this.clickedQues.length - 1) {
+      if (index < this.clickedQues.length) {
         this.clickedQues[index + 1] = true;
       }
     });

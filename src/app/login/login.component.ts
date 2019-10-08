@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import {
@@ -8,6 +8,7 @@ import {
   Validators
 } from '@angular/forms';
 import { ApiService } from '../shared/services/api.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -22,17 +23,31 @@ export class LoginComponent implements OnInit {
   errorMsg: boolean = false;
   errorMsgDisplay: string = '';
   error: Error;
-  constructor(public router: Router, private apiService: ApiService) {}
+  elem;
+  constructor(public router: Router, private apiService: ApiService, @Inject(DOCUMENT) private document: any) { }
 
   ngOnInit() {
+    this.elem = document.documentElement;
     this.loginForm = new FormGroup({
-      userId: new FormControl('', [Validators.required]),
+      rollNo: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
   }
 
   onLoggedin() {
     console.log('logged in worked');
+    if (this.elem.requestFullscreen) {
+      this.elem.requestFullscreen();
+    } else if (this.elem.mozRequestFullScreen) {
+      /* Firefox */
+      this.elem.mozRequestFullScreen();
+    } else if (this.elem.webkitRequestFullscreen) {
+      /* Chrome, Safari and Opera */
+      this.elem.webkitRequestFullscreen();
+    } else if (this.elem.msRequestFullscreen) {
+      /* IE/Edge */
+      this.elem.msRequestFullscreen();
+    }
     // this.router.navigate(['/dashboard']);
     this.apiService
       .loginCandidate(this.loginForm.value)

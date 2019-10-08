@@ -29,7 +29,9 @@
             "styles": [
               "src/styles/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "./platform.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

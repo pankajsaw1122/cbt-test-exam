@@ -12,13 +12,13 @@
               <div class="form-content">
                 <div class="form-group">
                   <mat-form-field appearance="outline">
-                    <mat-label>Email-id or Mobile Number</mat-label>
-                    <input type="text" matInput class="input-style" formControlName="userId"
-                      placeholder="Email-id or Mobile Number">
+                    <mat-label>Enter Roll No</mat-label>
+                    <input type="text" matInput class="input-style" formControlName="rollNo"
+                      placeholder="Enter Roll No">
                   </mat-form-field>
                   <mat-error>
-                    <span *ngIf="!loginForm.get('userId').valid && loginForm.get('userId').touched">
-                      <span *ngIf="loginForm.get('userId').errors['required']">Please enter valid email id </span>
+                    <span *ngIf="!loginForm.get('rollNo').valid && loginForm.get('rollNo').touched">
+                      <span *ngIf="loginForm.get('rollNo').errors['required']">Please enter Roll No  </span>
                     </span>
                   </mat-error>
                 </div>

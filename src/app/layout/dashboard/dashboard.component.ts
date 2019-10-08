@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/services/api.service';
@@ -19,22 +19,29 @@ export class DashboardComponent implements OnInit {
   btnText = 'Save & Next';
   prevDisable = false;
   nextDisable = false;
+  imagePath = 'http://' + window.location.hostname + ':5000/';
   quesData = {
     categ_marks: 0,
     categ_name: '',
     choiceData: [],
     choice_id: [],
+    choiceImage1: '',
+    choiceImage2: '',
+    choiceImage3: '',
+    choiceImage4: '',
     marks: 1,
     neg_mark: 0.25,
     ques_categ_id: 0,
     ques_id: 0,
     ques_text: '',
+    ques_image: '',
     ques_type_id: 0,
     ques_type: '',
     total_categ_ques: 0
   };
   choiceId = [];
-
+  ckeConfig: any;
+  @ViewChild('editor') ckeditor: any;
   constructor(
     public dialog: MatDialog,
     public router: Router,
@@ -42,6 +49,17 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.ckeConfig = {
+      allowedContent: true,
+      readOnly: true,
+      type: 'inline',
+      // enterMode: 2,
+      // extraPlugins: 'divarea',
+      forcePasteAsPlainText: false,
+      height: 'auto',
+      toolbarGroups: [
+      ],
+  };
     this.initializeForm();
     this.apiService
       .fetchQuestionsList(sessionStorage.getItem('examId'))
@@ -91,6 +109,13 @@ export class DashboardComponent implements OnInit {
           .setValue(sessionStorage.getItem('examId'));
         this.answerForm.get('categ_id').setValue(this.quesData.ques_categ_id);
         this.answerForm.get('ques_id').setValue(this.quesData.ques_id);
+        this.quesData.ques_image = this.quesData.ques_image === '' ? '' : this.imagePath + this.quesData.ques_image;
+        this.quesData.choiceData[0].choiceImage = this.quesData.choiceData[0].choiceImage !== '' ? this.imagePath + this.quesData.choiceData[0].choiceImage : '';
+        this.quesData.choiceData[1].choiceImage = this.quesData.choiceData[1].choiceImage !== '' ? this.imagePath + this.quesData.choiceData[1].choiceImage : '';
+        this.quesData.choiceData[2].choiceImage = this.quesData.choiceData[2].choiceImage !== '' ? this.imagePath + this.quesData.choiceData[2].choiceImage : '';
+        this.quesData.choiceData[3].choiceImage = this.quesData.choiceData[3].choiceImage !== '' ? this.imagePath + this.quesData.choiceData[3].choiceImage : '';
+        console.log(this.quesData.choiceData[0].choiceImage);
+        console.log(this.quesData.choiceImage1);
         console.log(this.answerForm.value);
         if (
           this.quesData.ques_type_id === 1 &&
@@ -113,13 +138,25 @@ export class DashboardComponent implements OnInit {
             for (let i = 0; i < this.quesData.choiceData.length; i++) {
               for (let j = 0; j < this.quesData.choice_id.length; j++) {
                 console.log('question is checkbox typed');
-                if (this.quesData.choiceData[i].choiceId === this.quesData.choice_id[j] && i === 0) {
+                if (
+                  this.quesData.choiceData[i].choiceId ===
+                    this.quesData.choice_id[j] &&
+                  i === 0
+                ) {
                   this.answerForm.get('choice_id_checkbox1').setValue(true);
                 }
-                if (this.quesData.choiceData[i].choiceId === this.quesData.choice_id[j] && i === 1) {
+                if (
+                  this.quesData.choiceData[i].choiceId ===
+                    this.quesData.choice_id[j] &&
+                  i === 1
+                ) {
                   this.answerForm.get('choice_id_checkbox2').setValue(true);
                 }
-                if (this.quesData.choiceData[i].choiceId === this.quesData.choice_id[j] && i === 2) {
+                if (
+                  this.quesData.choiceData[i].choiceId ===
+                    this.quesData.choice_id[j] &&
+                  i === 2
+                ) {
                   this.answerForm.get('choice_id_checkbox3').setValue(true);
                 }
                 if (
@@ -151,7 +188,7 @@ export class DashboardComponent implements OnInit {
       this.prevDisable = true;
     }
     if (this.questionsId.length - 1 === this.index) {
-      this.btnText = 'Finish Exam';
+      this.btnText = 'Save';
     } else {
       this.btnText = 'Save & Next';
     }
@@ -170,7 +207,7 @@ export class DashboardComponent implements OnInit {
       this.apiService.onNextOrPrevClick.emit(this.index);
     }
     if (this.questionsId.length - 1 === this.index) {
-      this.btnText = 'Finish Exam';
+      this.btnText = 'Save';
     } else {
       this.btnText = 'Save & Next';
     }
@@ -200,7 +237,7 @@ export class DashboardComponent implements OnInit {
 
   onSubmit() {
     if (this.questionsId.length - 1 === this.index) {
-      this.btnText = 'Finish Exam';
+      this.btnText = 'Save';
     } else {
       this.btnText = 'Save & Next';
     }
@@ -234,7 +271,9 @@ export class DashboardComponent implements OnInit {
     this.answerForm.value.choiceId = this.choiceId;
     if (this.answerForm.value.choiceId.length !== 0) {
       console.log(this.answerForm.value.choiceId);
-      console.log('choice id length = ' + this.answerForm.value.choiceId.length);
+      console.log(
+        'choice id length = ' + this.answerForm.value.choiceId.length
+      );
       this.saveAnswer();
     } else {
       this.onNext();
@@ -242,11 +281,17 @@ export class DashboardComponent implements OnInit {
   }
 
   saveAnswer() {
-    this.apiService.onAnswered.emit(this.index);
+    console.log('this method called');
     this.apiService.saveAnswer(this.answerForm.value).subscribe((data: any) => {
       if (data.status === 200 || data.status === '200') {
+        console.log('ques length = ' + this.questionsId.length);
+        console.log('index = ' + this.index);
+        if (this.questionsId.length - 1 >= this.index) {
+          this.apiService.onAnswered.emit(this.index);
+        }
         if (this.questionsId.length - 1 > this.index) {
           this.answerForm.reset();
+          console.log('inside condition');
           this.index++;
           this.fetchQuestion(this.index);
         }

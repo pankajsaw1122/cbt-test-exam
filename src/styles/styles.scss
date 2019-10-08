@@ -5,6 +5,7 @@
 @import "rtl";
 @import "responsive";
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '~material-design-icons/iconfont/material-icons.css';
 
 
 .loading-shade {
@@ -46,4 +47,32 @@ mat-dialog-container {
 .mat-radio-container {
   width: 16px !important;
   height: 16px !important;
+}
+.text-area {
+  display: inline-flex;
+}
+
+.cke_wysiwyg_div {
+  white-space: normal !important;
+  overflow: unset !important;
+  
+}
+
+.cke_chrome {
+  border: none !important;
+}
+
+.cke_top {
+  border: none !important;
+  padding: 0px !important;
+}
+
+.cke_bottom {
+  border: none !important;
+  padding: 0px !important;
+  background: none !important;
+}
+
+.cke_bottom {
+  display: none !important;
 }

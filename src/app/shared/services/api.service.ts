@@ -15,7 +15,7 @@ export class ApiService {
   onAnswered = new EventEmitter<number>();
   onClear = new EventEmitter<number>();
 
-  private apiUrl = 'http://localhost:5000/';
+  private apiUrl = 'http://' + window.location.hostname + ':5000/';
 
   constructor(private http: HttpClient) {}
 

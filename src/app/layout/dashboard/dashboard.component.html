@@ -4,25 +4,42 @@
     <span *ngIf="quesData.ques_type_id == 2"> Question Type : Multiple Choice, </span>
     <span> Positive Mark: {{quesData.marks}}, </span> &nbsp; <span> Negative Mark: {{quesData.neg_mark}} </span>
   </div>
-  <div class="container-fluid">
+  <div class="box-class">
       <form [formGroup]="answerForm" class="form-size">
     <div class="ques-text">
-      Q. {{index + 1}}) {{quesData.ques_text}}
+     <pre class="pre-class"> Q. {{index + 1}}) <span class="text-area"><ckeditor [config]="ckeConfig" data="{{quesData.ques_text}}"></ckeditor></span></pre> 
+     <div class="ques-image" *ngIf="quesData.ques_image !== ''">
+       <img [src]="quesData.ques_image">
+     </div>
 
       <div *ngIf="quesData.ques_type_id == 1" class="ques-opt">
         <mat-radio-group formControlName="choice_id_radio" class="option-section">
           <mat-radio-button class="opt-text" *ngFor="let option of quesData.choiceData" [value]="option.choiceId">
-            {{option.choiceText}}
+            <span class="text-area"><ckeditor [config]="ckeConfig" data="{{option.choiceText}}"></ckeditor></span>
+            <div class="choice-image" *ngIf="option.choiceImage !== null || option.choiceImage !== ''">
+              <img [src]="option.choiceImage">
+            </div>
           </mat-radio-button>
         </mat-radio-group>
       </div>
       <div *ngIf="quesData.ques_type_id == 2" class="ques-opt">
         <section class="option-section">
-          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox1" >{{quesData.choiceData[0].choiceText}}</mat-checkbox>
-          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox2" >{{quesData.choiceData[1].choiceText}}</mat-checkbox>
-          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox3" >{{quesData.choiceData[2].choiceText}}</mat-checkbox>
-          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox4" >{{quesData.choiceData[3].choiceText}}</mat-checkbox>
-
+          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox1" ><span class="text-area"><ckeditor [config]="ckeConfig" data="{{quesData.choiceData[0].choiceText}}"></ckeditor></span></mat-checkbox>
+          <div class="choice-image" *ngIf="quesData.choiceData[0].choiceImage !== ''">
+            <img [src]="quesData.choiceData[0].choiceImage">
+          </div>
+          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox2" ><span class="text-area"><ckeditor [config]="ckeConfig" data="{{quesData.choiceData[1].choiceText}}"></ckeditor></span></mat-checkbox>
+          <div class="choice-image" *ngIf="quesData.choiceData[1].choiceImage !== ''">
+            <img [src]="quesData.choiceData[1].choiceImage">
+          </div>
+          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox3" ><span class="text-area"><ckeditor [config]="ckeConfig" data="{{quesData.choiceData[2].choiceText}}"></ckeditor></span></mat-checkbox>
+          <div class="choice-image" *ngIf="quesData.choiceData[2].choiceImage !== ''">
+            <img [src]="quesData.choiceData[2].choiceImage">
+          </div>
+          <mat-checkbox class="opt-text"  formControlName="choice_id_checkbox4" ><span class="text-area"><ckeditor [config]="ckeConfig" data="{{quesData.choiceData[3].choiceText}}"></ckeditor></span></mat-checkbox>
+          <div class="choice-image" *ngIf="quesData.choiceData[3].choiceImage !== ''">
+            <img [src]="quesData.choiceData[3].choiceImage">
+          </div>
         </section>
       </div>
     </div>
@@ -32,7 +49,8 @@
     <button mat-flat-button color="primary" (click)="onClear()" class="clear-btn">Clear</button>
     <button mat-flat-button color="warn" class="finish-btn" (click)="finishExam()">Finish Exam</button>
 
-    <button mat-flat-button color="primary" class="save-next" (click)="onSubmit()">{{btnText}}</button>
+    <button mat-flat-button color="primary" class="save-next" (click)="onSubmit()">{{btnText}}
+    </button>
 
   </div>
   </form>
