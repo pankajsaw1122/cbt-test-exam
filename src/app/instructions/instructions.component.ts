@@ -7,7 +7,6 @@ import { Router, ActivatedRoute } from '@angular/router';
     selector: 'app-instructions',
     templateUrl: './instructions.component.html',
     styleUrls: ['./instructions.component.scss'],
-    animations: [routerTransition()]
 })
 export class InstructionsComponent implements OnInit {
     userId = '';

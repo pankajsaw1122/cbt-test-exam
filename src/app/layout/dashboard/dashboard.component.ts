@@ -9,8 +9,7 @@ import { MatDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  animations: [routerTransition()]
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   answerForm: FormGroup;
@@ -49,6 +48,12 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    for (let i = 0; i < 9; i++) {
+      this.apiService.onAnswered.emit(i);
+    }
+    if (sessionStorage.getItem('isLoggedIn') !== '1') {
+      this.router.navigate(['/']);
+    }
     this.ckeConfig = {
       allowedContent: true,
       readOnly: true,
@@ -61,9 +66,7 @@ export class DashboardComponent implements OnInit {
       ],
   };
     this.initializeForm();
-    this.apiService
-      .fetchQuestionsList(sessionStorage.getItem('examId'))
-      .subscribe((data: any) => {
+    this.apiService.fetchQuestionsList(sessionStorage.getItem('examId')).subscribe((data: any) => {
         this.questionsId = data.data;
         if (data.status === 200 || data.status === '200') {
           this.fetchQuestion(this.index);

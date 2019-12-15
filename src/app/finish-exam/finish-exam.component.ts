@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { routerTransition } from '../router.animations';
 import { ApiService } from '../shared/services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -64,5 +64,10 @@ export class FinishExamComponent implements OnInit {
           console.log(data.data);
         }
       });
+  }
+  ngOnDestroy() {
+    console.log('On destry called');
+    window.sessionStorage.clear();
+    window.localStorage.clear();
   }
 }
