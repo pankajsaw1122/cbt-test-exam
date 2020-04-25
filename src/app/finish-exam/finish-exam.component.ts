@@ -20,6 +20,15 @@ export class FinishExamComponent implements OnInit {
     finalExamMark: 0
   };
 
+  examData = {
+    examName: sessionStorage.getItem('exam_name'),
+    examDuration: sessionStorage.getItem('examMinute'),
+    totalQues: sessionStorage.getItem('examTotalQues'),
+    totalMarks: sessionStorage.getItem('examMarks'),
+    name: sessionStorage.getItem('candtName'),
+    roll: sessionStorage.getItem('candtRoll'),
+    classes: sessionStorage.getItem('classes')
+  };
   constructor(
     public router: Router,
     private apiService: ApiService,

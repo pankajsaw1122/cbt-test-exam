@@ -1,27 +1,29 @@
 <div class="instructions-page">
-    <mat-card class="details-card">
-        <mat-card-header>
-          <mat-card-title>Candidate Detail</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Class</th>
-                    <th>Roll No</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{{ userData.name }}</td>
-                    <td>{{ userData.class }}</td>
-                    <td>{{ userData.roll }}</td>
-                  </tr>
-                </tbody>
-              </table>
-        </mat-card-content>
-      </mat-card>
+  <mat-card class="details-card">
+    <mat-card-header class="card-head">
+      <mat-card-title class="card-title">Candidate Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="tbl-header">
+            <th>Exam Name</th>
+            <th>Candidate Name</th>
+            <th>Class</th>
+            <th>Roll No</th>
+          </tr>
+        </thead>
+        <tbody class="tb-content">
+          <tr>
+            <td>{{ userData.exam_name }}</td>
+            <td>{{ userData.name }}</td>
+            <td>{{ userData.class }}</td>
+            <td>{{ userData.roll }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
   <div class="row">
     <div class="container-fluid">
       <div class="marg">
@@ -29,38 +31,41 @@
           <div class="card-header">Important Instructions </div>
           <div class="card-body">
             <div class="inst-text">
-              <p> i)
-                Use of mobile phone, calculator and other electronic gadgets and their accessories is not permitted.
-                Therefore,
-                these should not, be brought inside the Examination Premises / Venue.
-              </p>
-              <p>
-
-                ii) Candidature of any candidate found to possess mobile phones or any other means of wireless
-                communication
-                or
-                related accessories either in working or switched off mode, shall be cancelled forthwith. This will also
-                invite
-                further penal action as per the policy of the Commission.
-              </p>
-              <p>
-                iii) The Candidates are advised to desist from use of any unfair method in the examination hall which
-                will
-                render
-                them ineligible for further consideration for the examination and also lead to their debarment from
-                Commission’s
-                examinations in future beside inviting criminal prosecution.
-
-              </p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">1) For best view use LAPTOP / PC / TABLET</li>
+                <li class="list-group-item">2) If you are using mobile : keep Rotation mode on and use the phone in
+                  Landscape mode</li>
+                <li class="list-group-item">3) <img src="assets/images/timer.png"> Timer : Available on the right top</li>
+                <li class="list-group-item">4) <img src="assets/images/prev.png"> Previous : Go to previous question</li>
+                <li class="list-group-item">5) <img src="assets/images/save.png"> Next : Go to next question</li>
+                <li class="list-group-item">6) <img src="assets/images/clear.png"> Clear : Can clear your response, suppose you want to change your option
+                </li>
+                <li class="list-group-item">7) <img src="assets/images/saveandnext.png"> Save & Next : Submit your response & go to next question</li>
+                <li class="list-group-item">8) <img src="assets/images/finish.png"> Finish : Finish the exam, this button will be enabled 15 minutes
+                  before finishing the exam.</li>
+                <li class="list-group-item">9) Note: Make sure that you are clicking on Save & Next option to submit
+                  your answer otherwise your answer will not submitted and evaluated.</li>
+                <li class="list-group-item">10) <img src="assets/images/visited.png"> Yellow : You have read the question, option unmarked</li>
+                <li class="list-group-item">11) <img src="assets/images/savedques.png"> Green : Your response is submitted</li>
+                <li class="list-group-item">12) <img src="assets/images/unvisited.png"> Gray : Question not attended</li>
+              </ul>
             </div>
           </div>
-          <div class="card-footer">
-            <div class="start-btn">
-              <button mat-raised-button (click)="startExam()" color="primary">Start Exam</button>
-              <p *ngIf="errorMessage == 1"> {{ errorText }} </p>
+          <form [formGroup]="terms" (ngSubmit)="startExam()">
+            <!-- <div class="form-group"> -->
+              <div class="check">
+                <mat-checkbox class="check-margin" formControlName="check"> &nbsp; I understood all instructions and I agree to continue
+                </mat-checkbox>
+              <!-- </div> -->
             </div>
+            <div class="card-footer">
+              <div class="start-btn">
+                <button mat-raised-button type="submit" [disabled]="terms.get('check').value === false" color="primary">Start Exam</button>
+                <p *ngIf="errorMessage == 1"> {{ errorText }} </p>
+              </div>
 
-          </div>
+            </div>
+          </form>
         </div>
 
       </div>

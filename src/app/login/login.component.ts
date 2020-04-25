@@ -55,10 +55,17 @@ export class LoginComponent implements OnInit {
         console.log(data.data.userData);
         if (data.status === 200 || data.status === '200') {
           if (data.data.userData.allow_login === 1) {
+            sessionStorage.setItem('candtId', data.data.userData.id);
+            sessionStorage.setItem('candtName', data.data.userData.fname + ' ' + data.data.userData.lname);
+            sessionStorage.setItem('candtRoll', data.data.userData.roll_no);
+            sessionStorage.setItem('classes', data.data.userData.classes);
             sessionStorage.setItem('authToken', data.data.token);
             sessionStorage.setItem('exam_name', data.data.userData.exam_name);
             sessionStorage.setItem('examId', data.data.userData.examId);
             sessionStorage.setItem('examMinute', data.data.userData.exam_minute);
+            sessionStorage.setItem('examMarks', data.data.userData.total_marks);
+            sessionStorage.setItem('examTotalQues', data.data.userData.total_ques);
+
             let id = data.data.userData.id;
             this.router.navigate(['/instructions/', id]);
           }

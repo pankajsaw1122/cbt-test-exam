@@ -5,12 +5,24 @@
   <div class="exam-info">
     <table class="table table-bordered">
       <thead>
-        <tr>
+        <tr class="tbl-header">
           <th>Name</th>
           <th>Detail</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="tb-content">
+        <tr>
+          <td>Candidate Name</td>
+          <td>{{candidateData.name}}</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>{{candidateData.classes}}</td>
+        </tr>
+        <tr>
+          <td>Roll No.</td>
+          <td>{{candidateData.roll}}</td>
+        </tr>
         <tr>
           <td>Exam Name</td>
           <td>{{examData.exam_name}}</td>
@@ -41,6 +53,7 @@
         <button mat-mini-fab  [ngClass]="{
           'btn1-class': true,
           'attempted': clickedQues[i],
+          'un-answerd': unAnswered[i],
           'answered': answeredQues[i]
         }" (click)="quesClicked(i)"><b>{{i+1}}</b></button>
       </div>

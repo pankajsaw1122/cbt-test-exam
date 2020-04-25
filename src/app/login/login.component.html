@@ -1,6 +1,9 @@
 <div class="login-page" [@routerTransition]>
   <div class="login-background">
     <div class="bg-overlay">
+      <!-- <div class="login-header">
+        <p>Computer Based Exam System <span class="superscript"><sup>(Beta version 0.1)</sup></span></p>
+      </div> -->
       <div class="col-md-4 top-pad">
         <div class="card">
           <div class="card-header">Login</div>
@@ -18,7 +21,7 @@
                   </mat-form-field>
                   <mat-error>
                     <span *ngIf="!loginForm.get('rollNo').valid && loginForm.get('rollNo').touched">
-                      <span *ngIf="loginForm.get('rollNo').errors['required']">Please enter Roll No  </span>
+                      <span *ngIf="loginForm.get('rollNo').errors['required']">Please enter Roll No </span>
                     </span>
                   </mat-error>
                 </div>
@@ -36,7 +39,7 @@
                   </mat-error>
                 </div>
               </div>
-              <button  type="submit" mat-raised-button color="primary"> Log in </button> &nbsp;
+              <button type="submit" mat-raised-button color="primary"> Log in </button> &nbsp;
               <!-- <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a> -->
               <div class="alert-messages">
                 <span class="success" *ngIf="successMsg"> {{ successMsgDisplay }}</span>

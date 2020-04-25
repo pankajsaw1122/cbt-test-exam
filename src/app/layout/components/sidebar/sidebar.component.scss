@@ -79,9 +79,13 @@ $topnav-background-color: #222;
     background-color:#ffd740;
     border: 2px slid blue;
 }
+.un-answerd {
+    background-color:#df1e1e;
+}
 .answered {
     background-color:#33d65b;
 }
+
 .current-ques {
     border: 2px solid blue;
 }
@@ -90,7 +94,26 @@ $topnav-background-color: #222;
     height: 120px;
     width: 120px;
 }
+.table-bordered {
+    font-size: 12px !important;
+}
 
+.table th, .table td {
+    padding: 0.50rem !important;
+}
+
+.tbl-header {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+}
+.tb-content {
+    font-size: 14px;
+    // font-weight: bold;
+    text-transform: capitalize;
+    font-family: 'Times New Roman', Times, serif;
+}
 // .nested-menu {
 //     .list-group-item {
 //         cursor: pointer;

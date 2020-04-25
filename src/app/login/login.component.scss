@@ -13,8 +13,30 @@
     background-size: cover;
     text-align: center;
 }
+
+.login-header {
+    font-size: 32px;
+    padding-top: 32px;
+
+    // margin-top: 32px;
+    color: white;
+    font-weight: bolder;
+}
+
+@media only screen and (max-width: 480px) {
+    .login-header {
+        font-size: 24px;
+        padding-top: 24px;
+        // margin-top: 24px;
+    }
+  }
+.superscript {
+    font-size: 12px;
+    vertical-align: super;
+//   font-size: smaller;
+}
 .top-pad {
-    padding-top: 8%;
+    padding-top: 5%;
 }
 
 .bg-overlay {

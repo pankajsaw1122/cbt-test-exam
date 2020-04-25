@@ -2,5 +2,5 @@
     <a class="navbar-brand" href="#">{{examName}}</a>
     <ul class="navbar-nav mr-auto">
 </ul>
-    <span class="timer">Time: <countdown [config]="{leftTime: examMinute, notify: [ 1 ]}" (notify)="onNotify($event)">$!m!:$!s!</countdown></span>
+    <span class="timer">Time: <countdown [config]="{leftTime: examMinute, notify: notifyArray }" (notify)="onNotify($event)">$!m!:$!s!</countdown></span>
 </nav>

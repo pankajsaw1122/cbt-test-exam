@@ -1,6 +1,37 @@
 <div class="instructions-page" [@routerTransition]>
   <mat-card class="details-card">
     <mat-card-header>
+      <mat-card-title>Exam Detail</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Exam Name</th>
+            <th>Candidate Name</th>
+            <th>Class</th>
+            <th>Roll No</th>
+            <th>Exam Duration (Min.)</th>
+            <th>Total Question</th>
+            <th>Total Marks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{examData.examName}}</td>
+            <td>{{ examData.name }}</td>
+            <td>{{ examData.classes }}</td>
+            <td>{{ examData.roll }}</td>
+            <td>{{ examData.examDuration }}</td>
+            <td>{{ examData.totalQues }}</td>
+            <td>{{ examData.totalMarks }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="details-card">
+    <mat-card-header>
       <mat-card-title>Result</mat-card-title>
     </mat-card-header>
     <mat-card-content>

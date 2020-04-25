@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import {throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 // import { map } from 'rxjs/operators';
@@ -11,13 +11,15 @@ export class ApiService {
   onQuesLoad = new EventEmitter<any>();
   onQuesClicked = new EventEmitter<number>();
   onNextOrPrevClick = new EventEmitter<number>();
+  onWithoutSaveNext = new EventEmitter<number>();
   // onPrevClick = new EventEmitter<number>();
   onAnswered = new EventEmitter<number>();
   onClear = new EventEmitter<number>();
+  enableFinishBtn = new EventEmitter<boolean>();
 
-  private apiUrl = 'http://' + window.location.hostname + ':5000/';
+  private apiUrl = 'http://' + window.location.hostname + ':8080/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -44,7 +46,13 @@ export class ApiService {
     }).pipe(map((res) => res), catchError(this.handleError));
   }
   getExamData(data) {
-    return this.http.get(this.apiUrl + 'exam/getExamData?id=' + data, {
+    let params = '';
+    if (typeof data === 'object') {
+      params = 'id=' + data.examId + '&candtId=' + data.candtId;
+    } else {
+      params = 'id=' + data;
+    }
+    return this.http.get(this.apiUrl + 'exam/getExamData?' + params, {
       headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('authToken'))
     }).pipe(map((res) => res), catchError(this.handleError));
   }
@@ -144,7 +152,6 @@ export class ApiService {
     }).pipe(map((res) => res), catchError(this.handleError));
   }
 
-
   saveAnswer(data) {
     return this.http.post(this.apiUrl + 'answer/addAnswer', data, {
       headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('authToken'))
@@ -169,6 +176,12 @@ export class ApiService {
   }
   saveResult(data) {
     return this.http.post(this.apiUrl + 'result/saveResult', data, {
+      headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('authToken'))
+    }).pipe(map((res) => res), catchError(this.handleError));
+  }
+
+  updateLeftMinute(data) {
+    return this.http.post(this.apiUrl + 'candidate/updateLeftTime', data, {
       headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('authToken'))
     }).pipe(map((res) => res), catchError(this.handleError));
   }

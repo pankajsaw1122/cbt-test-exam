@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   btnText = 'Save & Next';
   prevDisable = false;
   nextDisable = false;
+  disableFinishBtn = true;
   imagePath = 'http://' + window.location.hostname + ':5000/';
   quesData = {
     categ_marks: 0,
@@ -45,12 +46,12 @@ export class DashboardComponent implements OnInit {
     public dialog: MatDialog,
     public router: Router,
     private apiService: ApiService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    for (let i = 0; i < 9; i++) {
-      this.apiService.onAnswered.emit(i);
-    }
+    // for (let i = 0; i < 9; i++) {
+    //   this.apiService.onAnswered.emit(i);
+    // }
     if (sessionStorage.getItem('isLoggedIn') !== '1') {
       this.router.navigate(['/']);
     }
@@ -64,19 +65,38 @@ export class DashboardComponent implements OnInit {
       height: 'auto',
       toolbarGroups: [
       ],
-  };
+    };
     this.initializeForm();
     this.apiService.fetchQuestionsList(sessionStorage.getItem('examId')).subscribe((data: any) => {
-        this.questionsId = data.data;
-        if (data.status === 200 || data.status === '200') {
-          this.fetchQuestion(this.index);
-          this.apiService.onQuesLoad.emit(this.questionsId);
-        }
-      });
+      this.questionsId = data.data;
+      if (data.status === 200 || data.status === '200') {
+        this.fetchQuestion(this.index);
+        this.apiService.onQuesLoad.emit(this.questionsId);
+      }
+    });
 
     this.apiService.onQuesClicked.subscribe((index: any) => {
       this.index = index;
+      console.log('Inside on ques cicked');
+      console.log(this.questionsId.length);
+      console.log(index);
+      if (this.index < this.questionsId.length - 1) {
+        this.nextDisable = false;
+      }
+      if (this.index === this.questionsId.length - 1) {
+        this.nextDisable = true;
+      }
+      if (this.index > 0) {
+        this.prevDisable = false;
+      }
+      if (this.index === 0) {
+        this.prevDisable = true;
+      }
       this.fetchQuestion(this.index);
+    });
+
+    this.apiService.enableFinishBtn.subscribe((value: any) => {
+      this.disableFinishBtn = value;
     });
   }
 
@@ -143,28 +163,28 @@ export class DashboardComponent implements OnInit {
                 console.log('question is checkbox typed');
                 if (
                   this.quesData.choiceData[i].choiceId ===
-                    this.quesData.choice_id[j] &&
+                  this.quesData.choice_id[j] &&
                   i === 0
                 ) {
                   this.answerForm.get('choice_id_checkbox1').setValue(true);
                 }
                 if (
                   this.quesData.choiceData[i].choiceId ===
-                    this.quesData.choice_id[j] &&
+                  this.quesData.choice_id[j] &&
                   i === 1
                 ) {
                   this.answerForm.get('choice_id_checkbox2').setValue(true);
                 }
                 if (
                   this.quesData.choiceData[i].choiceId ===
-                    this.quesData.choice_id[j] &&
+                  this.quesData.choice_id[j] &&
                   i === 2
                 ) {
                   this.answerForm.get('choice_id_checkbox3').setValue(true);
                 }
                 if (
                   this.quesData.choiceData[i].choiceId ===
-                    this.quesData.choice_id[j] &&
+                  this.quesData.choice_id[j] &&
                   i === 3
                 ) {
                   this.answerForm.get('choice_id_checkbox4').setValue(true);
@@ -215,6 +235,27 @@ export class DashboardComponent implements OnInit {
       this.btnText = 'Save & Next';
     }
   }
+
+  onWithoutSaveNext() {
+    console.log('next button called');
+    this.prevDisable = false;
+    if (this.index === this.questionsId.length - 2) {
+      this.nextDisable = true;
+    }
+    // this.answerForm.reset();
+    if (this.questionsId.length - 1 > this.index) {
+      console.log('from next button fetch question called');
+      this.index++;
+      this.fetchQuestion(this.index);
+      this.apiService.onWithoutSaveNext.emit(this.index - 1);
+    }
+    if (this.questionsId.length - 1 === this.index) {
+      this.btnText = 'Save';
+    } else {
+      this.btnText = 'Save & Next';
+    }
+  }
+
   onClear() {
     this.answerForm.get('choice_id_radio').setValue('');
     this.answerForm.get('choice_id_checkbox1').setValue(false);
@@ -279,7 +320,7 @@ export class DashboardComponent implements OnInit {
       );
       this.saveAnswer();
     } else {
-      this.onNext();
+      this.onWithoutSaveNext();
     }
   }
 
@@ -301,6 +342,8 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+
 
   finishExam() {
     let examId = sessionStorage.getItem('examId');

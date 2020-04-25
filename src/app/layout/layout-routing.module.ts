@@ -9,13 +9,13 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard' },
             { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-            { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
-            { path: 'exam', loadChildren: './exam/exam.module#ExamModule' },
-            { path: 'categories', loadChildren: './categories/categories.module#CategoriesModule' },
-            { path: 'questions', loadChildren: './questions/questions.module#QuestionsModule' },
-            { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
-            { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
-            { path: 'student-list', loadChildren: './student-list/student-list.module#StudentListModule' }
+            // { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
+            // { path: 'exam', loadChildren: './exam/exam.module#ExamModule' },
+            // { path: 'categories', loadChildren: './categories/categories.module#CategoriesModule' },
+            // { path: 'questions', loadChildren: './questions/questions.module#QuestionsModule' },
+            // { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
+            // { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
+            // { path: 'student-list', loadChildren: './student-list/student-list.module#StudentListModule' }
         ]
     }
 ];

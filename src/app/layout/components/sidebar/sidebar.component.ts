@@ -12,8 +12,14 @@ export class SidebarComponent implements OnInit {
   quesList = [];
   clickedQues = [true];
   answeredQues = [];
-  // currentQues = [];
+  unAnswered = [];
 
+  // currentQues = [];
+  candidateData = {
+    name: sessionStorage.getItem('candtName'),
+    roll: sessionStorage.getItem('candtRoll'),
+    classes: sessionStorage.getItem('classes')
+  };
   examData = {
     exam_name: '',
     exam_minute: '',
@@ -40,6 +46,7 @@ export class SidebarComponent implements OnInit {
       while (i < this.quesList.length) {
         this.clickedQues.push(false);
         this.answeredQues.push(false);
+        this.unAnswered.push(false);
         i++;
       }
     });
@@ -53,6 +60,14 @@ export class SidebarComponent implements OnInit {
     });
     this.apiService.onNextOrPrevClick.subscribe((index: any) => {
       this.clickedQues[index] = true;
+    });
+    this.apiService.onClear.subscribe((index: any) => {
+      this.unAnswered[index] = false;
+      this.answeredQues[index] = false;
+    });
+    this.apiService.onWithoutSaveNext.subscribe((index: any) => {
+      this.unAnswered[index] = true;
+      this.clickedQues[index + 1] = true;
     });
     this.apiService.onClear.subscribe((index: any) => {
       this.answeredQues[index] = false;
