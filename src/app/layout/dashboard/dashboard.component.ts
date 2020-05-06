@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
   };
   choiceId = [];
   ckeConfig: any;
-  @ViewChild('editor', { static: false }) ckeditor: any;
+  @ViewChild('editor') ckeditor: any;
   constructor(
     public dialog: MatDialog,
     public router: Router,
