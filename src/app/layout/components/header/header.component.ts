@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { CountdownComponent } from 'ngx-countdown';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { MatInfoDialogComponent } from 'src/app/shared/info-dialog/info-dialog.component';
 @Component({
   selector: 'app-header',

@@ -3,7 +3,7 @@ import { routerTransition } from '../../router.animations';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { timeInterval } from 'rxjs/operators';
 

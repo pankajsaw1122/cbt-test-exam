@@ -4,7 +4,7 @@ import { MaterialModule } from '../material.module';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatError } from '@angular/material';
+import { MatError } from '@angular/material/form-field';
 
 @NgModule({
     imports: [CommonModule, LoginRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule ],
