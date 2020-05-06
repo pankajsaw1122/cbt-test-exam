@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   examName: string = '';
   examMinute: number;
   notifyArray = [];
-  @ViewChild(CountdownComponent) counter: CountdownComponent;
+  @ViewChild(CountdownComponent, { static: true }) counter: CountdownComponent;
   constructor(public router: Router, private apiService: ApiService, public dialog: MatDialog) {
   }
   ngOnInit() {
