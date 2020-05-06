@@ -33,22 +33,18 @@ export class FinishExamComponent implements OnInit {
     public router: Router,
     private apiService: ApiService,
     private paramRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.apiService
       .getMarksData(sessionStorage.getItem('examId'))
       .subscribe((data: any) => {
-        console.log(data);
         if (data.status === 200 || data.status === '200') {
-          console.log(data.data);
-          for (let examData of data.data) {
-            console.log(examData);
+          for (const examData of data.data) {
             if (
               JSON.stringify(examData.answered_id) ==
               JSON.stringify(examData.correct_ans_id)
             ) {
-              console.log('anser matched');
               this.resultData.positiveCount++;
               this.resultData.positiveMark = this.resultData.positiveMark + examData.marks;
             } else {
@@ -58,7 +54,6 @@ export class FinishExamComponent implements OnInit {
           }
           this.resultData.totalAnswerCount = this.resultData.positiveCount + this.resultData.negCount;
           this.resultData.finalExamMark = this.resultData.positiveMark - this.resultData.negMark;
-          console.log('total finalExamMark mark = ' + this.resultData.finalExamMark);
           this.saveResult(this.resultData);
         }
       });
@@ -68,14 +63,12 @@ export class FinishExamComponent implements OnInit {
     this.apiService
       .saveResult(resultData)
       .subscribe((data: any) => {
-        console.log(data);
         if (data.status === 200 || data.status === '200') {
           console.log(data.data);
         }
       });
   }
   ngOnDestroy() {
-    console.log('On destry called');
     window.sessionStorage.clear();
     window.localStorage.clear();
   }

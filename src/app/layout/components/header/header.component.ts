@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
   constructor(public router: Router, private apiService: ApiService, public dialog: MatDialog) {
   }
   ngOnInit() {
-    console.log(this.counter);
     const params = {
       examId: sessionStorage.getItem('examId'),
       candtId: sessionStorage.getItem('candtId')
@@ -39,28 +38,18 @@ export class HeaderComponent implements OnInit {
             this.notifyArray.push(totalMinuteIntrval);
           }
           this.notifyArray.push(1);
-          console.log(this.notifyArray);
-          // if (data.data[0].exam_minute <= 15) {
-          //   this.notifyArray = [1];
-          //   this.apiService.enableFinishBtn.emit(false);
-          // } else if (data.data[0].exam_minute > 15 && data.data[0].exam_minute <= 30) {
-          //   this.notifyArray = [600, 1];
-          // } else if (data.data[0].exam_minute > 30) {
-          //   this.notifyArray = [900, 1];
-          // }
         }
       });
     this.examName = sessionStorage.getItem('exam_name');
   }
 
   onNotify(event) {
-    console.log(event);
     const params = {
       candtId: sessionStorage.getItem('candtId'),
       left_minute: event / 1000
     };
     this.apiService.updateLeftMinute(params).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
     });
     if (event === 900000 || event === 600000) {
       const dialogRef = this.dialog.open(MatInfoDialogComponent, {
@@ -75,7 +64,6 @@ export class HeaderComponent implements OnInit {
       });
     } else if (event === 1000) {
       this.apiService.finishExam(sessionStorage.getItem('examId')).subscribe((data: any) => {
-        // console.log(data);
         if (data.status === 200 || data.status === '200') {
           this.router.navigate(['/finishexam']);
         } else {

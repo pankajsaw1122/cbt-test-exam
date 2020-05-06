@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/shared/services/api.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { MatDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { timeInterval } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -49,9 +50,6 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // for (let i = 0; i < 9; i++) {
-    //   this.apiService.onAnswered.emit(i);
-    // }
     if (sessionStorage.getItem('isLoggedIn') !== '1') {
       this.router.navigate(['/']);
     }
@@ -69,6 +67,8 @@ export class DashboardComponent implements OnInit {
     this.initializeForm();
     this.apiService.fetchQuestionsList(sessionStorage.getItem('examId')).subscribe((data: any) => {
       this.questionsId = data.data;
+      // console.log('Questions list id s');
+      // console.log(this.questionsId);
       if (data.status === 200 || data.status === '200') {
         this.fetchQuestion(this.index);
         this.apiService.onQuesLoad.emit(this.questionsId);
@@ -77,9 +77,6 @@ export class DashboardComponent implements OnInit {
 
     this.apiService.onQuesClicked.subscribe((index: any) => {
       this.index = index;
-      console.log('Inside on ques cicked');
-      console.log(this.questionsId.length);
-      console.log(index);
       if (this.index < this.questionsId.length - 1) {
         this.nextDisable = false;
       }
@@ -101,12 +98,11 @@ export class DashboardComponent implements OnInit {
   }
 
   initializeForm() {
-    console.log('Initialize form called');
     this.answerForm = new FormGroup({
       exam_id: new FormControl(sessionStorage.getItem('examId')),
       categ_id: new FormControl(''),
       ques_id: new FormControl(''),
-      choice_id_radio: new FormControl(),
+      choice_id_radio: new FormControl(''),
       choice_id_checkbox1: new FormControl(false),
       choice_id_checkbox2: new FormControl(false),
       choice_id_checkbox3: new FormControl(false),
@@ -115,21 +111,19 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchQuestion(index) {
-    console.log('fetch question called');
     this.initializeForm();
     // this.answerForm.reset();
-    let data = {
+    const params = {
       examId: sessionStorage.getItem('examId'),
       quesId: this.questionsId[index].id
     };
-    this.apiService.examQuestionsData(data).subscribe((data: any) => {
-      console.log('question data fetched');
+    this.apiService.examQuestionsData(params).subscribe((data: any) => {
       this.quesData = data.data[0];
+      // console.log('Printing question data');
       console.log(this.quesData);
+
       if (data.status === 200 || data.status === '200') {
-        this.answerForm
-          .get('exam_id')
-          .setValue(sessionStorage.getItem('examId'));
+        this.answerForm.get('exam_id').setValue(sessionStorage.getItem('examId'));
         this.answerForm.get('categ_id').setValue(this.quesData.ques_categ_id);
         this.answerForm.get('ques_id').setValue(this.quesData.ques_id);
         this.quesData.ques_image = this.quesData.ques_image === '' ? '' : this.imagePath + this.quesData.ques_image;
@@ -137,30 +131,23 @@ export class DashboardComponent implements OnInit {
         this.quesData.choiceData[1].choiceImage = this.quesData.choiceData[1].choiceImage !== '' ? this.imagePath + this.quesData.choiceData[1].choiceImage : '';
         this.quesData.choiceData[2].choiceImage = this.quesData.choiceData[2].choiceImage !== '' ? this.imagePath + this.quesData.choiceData[2].choiceImage : '';
         this.quesData.choiceData[3].choiceImage = this.quesData.choiceData[3].choiceImage !== '' ? this.imagePath + this.quesData.choiceData[3].choiceImage : '';
-        console.log(this.quesData.choiceData[0].choiceImage);
-        console.log(this.quesData.choiceImage1);
-        console.log(this.answerForm.value);
+
         if (
           this.quesData.ques_type_id === 1 &&
           this.quesData.choice_id !== null
         ) {
-          if (this.quesData.choice_id[0] !== '') {
-            console.log('question is radio typed');
-            this.answerForm
-              .get('choice_id_radio')
-              .setValue(this.quesData.choice_id[0]);
+          console.log('Inside choice consition');
+          if (this.quesData.choice_id.length !== 0 && this.quesData.choice_id[0] !== '') {
+            this.answerForm.get('choice_id_radio').setValue(this.quesData.choice_id[0]);
           }
         }
-        console.log(this.answerForm.value);
         if (
           this.quesData.ques_type_id === 2 &&
           this.quesData.choice_id !== null
         ) {
           if (this.quesData.choice_id.length !== null) {
-            console.log('Condition is true');
             for (let i = 0; i < this.quesData.choiceData.length; i++) {
               for (let j = 0; j < this.quesData.choice_id.length; j++) {
-                console.log('question is checkbox typed');
                 if (
                   this.quesData.choiceData[i].choiceId ===
                   this.quesData.choice_id[j] &&
@@ -192,14 +179,14 @@ export class DashboardComponent implements OnInit {
               }
             }
           }
-          console.log(this.answerForm.value);
         }
+        console.log(this.answerForm.value);
+        this.onAttemptSave();
       }
     });
   }
 
   onPrev() {
-    console.log('Previous button called');
     this.nextDisable = false;
     // this.answerForm.reset();
     if (this.index !== 0) {
@@ -217,69 +204,98 @@ export class DashboardComponent implements OnInit {
     }
   }
   onNext() {
-    console.log('next button called');
     this.prevDisable = false;
     if (this.index === this.questionsId.length - 2) {
       this.nextDisable = true;
     }
     // this.answerForm.reset();
     if (this.questionsId.length - 1 > this.index) {
-      console.log('from next button fetch question called');
       this.index++;
       this.fetchQuestion(this.index);
       this.apiService.onNextOrPrevClick.emit(this.index);
+
     }
     if (this.questionsId.length - 1 === this.index) {
       this.btnText = 'Save';
     } else {
       this.btnText = 'Save & Next';
+    }
+  }
+  onAttemptSave() {
+    let flag = 0;
+    if (this.quesData.ques_type_id === 1 && this.answerForm.value.choice_id_radio !== '') {
+      flag++;
+    }
+    if (this.quesData.ques_type_id === 2) {
+      if (this.answerForm.value.choice_id_checkbox1 === true) {
+        flag++;
+      }
+      if (this.answerForm.value.choice_id_checkbox2 === true) {
+        flag++;
+      }
+      if (this.answerForm.value.choice_id_checkbox3 === true) {
+        flag++;
+      }
+      if (this.answerForm.value.choice_id_checkbox4 === true) {
+        flag++;
+      }
+    }
+    if (flag === 0) {
+      this.apiService.saveAttempt(this.answerForm.value).subscribe((data: any) => {
+        // console.log('Inside attempt save');
+        // console.log(data);
+      });
     }
   }
 
   onWithoutSaveNext() {
-    console.log('next button called');
-    this.prevDisable = false;
-    if (this.index === this.questionsId.length - 2) {
-      this.nextDisable = true;
-    }
-    // this.answerForm.reset();
-    if (this.questionsId.length - 1 > this.index) {
-      console.log('from next button fetch question called');
-      this.index++;
-      this.fetchQuestion(this.index);
-      this.apiService.onWithoutSaveNext.emit(this.index - 1);
-    }
-    if (this.questionsId.length - 1 === this.index) {
-      this.btnText = 'Save';
-    } else {
-      this.btnText = 'Save & Next';
-    }
+    this.apiService.noAnswerSave(this.answerForm.value).subscribe((data: any) => {
+      // console.log('Inside attempt save');
+      // console.log(data);
+      this.prevDisable = false;
+      if (this.index === this.questionsId.length - 2) {
+        this.nextDisable = true;
+      }
+      // this.answerForm.reset();
+      if (this.questionsId.length - 1 > this.index) {
+        this.index++;
+        this.fetchQuestion(this.index);
+        this.apiService.onWithoutSaveNext.emit(this.index - 1);
+      }
+      if (this.questionsId.length - 1 === this.index) {
+        this.btnText = 'Save';
+      } else {
+        this.btnText = 'Save & Next';
+      }
+    });
   }
 
   onClear() {
+    console.log(this.answerForm.value.choice_id_radio);
     this.answerForm.get('choice_id_radio').setValue('');
     this.answerForm.get('choice_id_checkbox1').setValue(false);
     this.answerForm.get('choice_id_checkbox2').setValue(false);
     this.answerForm.get('choice_id_checkbox3').setValue(false);
     this.answerForm.get('choice_id_checkbox3').setValue(false);
+    console.log(this.answerForm.value.choice_id_radio);
+
     this.answerForm.value.choiceId = [];
     this.removeAnswer();
   }
   removeAnswer() {
-    this.apiService
-      .removeAnswer(this.answerForm.value)
-      .subscribe((data: any) => {
-        if (data.status === 200 || data.status === '200') {
-          if (this.questionsId.length - 1 > this.index) {
-            this.answerForm.reset();
-            this.fetchQuestion(this.index);
-            this.apiService.onClear.emit(this.index);
-          }
+    this.apiService.removeAnswer(this.answerForm.value).subscribe((data: any) => {
+      if (data.status === 200 || data.status === '200') {
+        if (this.questionsId.length - 1 > this.index) {
+          // this.answerForm.reset();
+          this.fetchQuestion(this.index);
+          this.apiService.onClear.emit(this.index);
         }
-      });
+      }
+    });
   }
 
   onSubmit() {
+    console.log(this.answerForm.value.choice_id_radio);
     if (this.questionsId.length - 1 === this.index) {
       this.btnText = 'Save';
     } else {
@@ -287,15 +303,9 @@ export class DashboardComponent implements OnInit {
     }
 
     this.choiceId = [];
-    console.log(this.choiceId);
-    if (
-      this.quesData.ques_type_id === 1 &&
-      this.answerForm.value.choice_id_radio !== null
-    ) {
-      console.log(this.answerForm.value.choice_id_radio);
+    if (this.quesData.ques_type_id === 1 && this.answerForm.value.choice_id_radio !== '') {
       this.choiceId.push(this.answerForm.value.choice_id_radio);
     }
-    console.log(this.choiceId);
     if (this.quesData.ques_type_id === 2) {
       if (this.answerForm.value.choice_id_checkbox1 === true) {
         this.choiceId.push(this.quesData.choiceData[0].choiceId);
@@ -310,14 +320,9 @@ export class DashboardComponent implements OnInit {
         this.choiceId.push(this.quesData.choiceData[3].choiceId);
       }
     }
-    console.log(this.choiceId);
 
     this.answerForm.value.choiceId = this.choiceId;
     if (this.answerForm.value.choiceId.length !== 0) {
-      console.log(this.answerForm.value.choiceId);
-      console.log(
-        'choice id length = ' + this.answerForm.value.choiceId.length
-      );
       this.saveAnswer();
     } else {
       this.onWithoutSaveNext();
@@ -325,17 +330,13 @@ export class DashboardComponent implements OnInit {
   }
 
   saveAnswer() {
-    console.log('this method called');
     this.apiService.saveAnswer(this.answerForm.value).subscribe((data: any) => {
       if (data.status === 200 || data.status === '200') {
-        console.log('ques length = ' + this.questionsId.length);
-        console.log('index = ' + this.index);
         if (this.questionsId.length - 1 >= this.index) {
           this.apiService.onAnswered.emit(this.index);
         }
         if (this.questionsId.length - 1 > this.index) {
           this.answerForm.reset();
-          console.log('inside condition');
           this.index++;
           this.fetchQuestion(this.index);
         }
@@ -343,10 +344,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-
-
   finishExam() {
-    let examId = sessionStorage.getItem('examId');
+    const examId = sessionStorage.getItem('examId');
     const dialogRef = this.dialog.open(MatDialogComponent, {
       width: '30%',
       data: {
@@ -357,10 +356,8 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         this.apiService.finishExam(examId).subscribe((data: any) => {
-          console.log(data);
           if (data.status === 200 || data.status === '200') {
             this.router.navigate(['/finishexam']);
-          } else {
           }
         });
       }

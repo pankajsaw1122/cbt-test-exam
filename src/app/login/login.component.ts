@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLoggedin() {
-    console.log('logged in worked');
     if (this.elem.requestFullscreen) {
       this.elem.requestFullscreen();
     } else if (this.elem.mozRequestFullScreen) {
@@ -52,7 +51,6 @@ export class LoginComponent implements OnInit {
     this.apiService
       .loginCandidate(this.loginForm.value)
       .subscribe((data: any) => {
-        console.log(data.data.userData);
         if (data.status === 200 || data.status === '200') {
           if (data.data.userData.allow_login === 1) {
             sessionStorage.setItem('candtId', data.data.userData.id);

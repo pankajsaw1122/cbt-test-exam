@@ -185,4 +185,26 @@ export class ApiService {
       headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('authToken'))
     }).pipe(map((res) => res), catchError(this.handleError));
   }
+
+  saveAttempt(data) {
+    return this.http.post(this.apiUrl + 'answer/onAttempt', data, {
+      headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('authToken'))
+    }).pipe(map((res) => res), catchError(this.handleError));
+  }
+  noAnswerSave(data) {
+    return this.http.post(this.apiUrl + 'answer/onNoAnswer', data, {
+      headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('authToken'))
+    }).pipe(map((res) => res), catchError(this.handleError));
+  }
+  answerList(data) {
+    return this.http.get(this.apiUrl + 'answer/answerList?exam_id=' + data, {
+      headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('authToken'))
+    }).pipe(map((res) => res), catchError(this.handleError));
+  }
+
+  saveQuestionOrder(data) {
+    return this.http.post(this.apiUrl + 'candidate/saveQuestionOrder', data, {
+      headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('authToken'))
+    }).pipe(map((res) => res), catchError(this.handleError));
+  }
 }

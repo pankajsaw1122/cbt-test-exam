@@ -15,8 +15,8 @@
 }
 
 .login-header {
-    font-size: 32px;
-    padding-top: 32px;
+    font-size: 36px;
+    padding-top: 36px;
 
     // margin-top: 32px;
     color: white;
@@ -25,14 +25,13 @@
 
 @media only screen and (max-width: 480px) {
     .login-header {
-        font-size: 24px;
-        padding-top: 24px;
+        display: none;
         // margin-top: 24px;
     }
   }
 .superscript {
-    font-size: 12px;
-    vertical-align: super;
+    font-size: 8px !important;
+    vertical-align: sub;
 //   font-size: smaller;
 }
 .top-pad {

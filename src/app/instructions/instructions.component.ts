@@ -27,11 +27,9 @@ export class InstructionsComponent implements OnInit {
             check: new FormControl(false, Validators.required)
         });
 
-        console.log(this.terms.get('check').value);
         this.userId = this.paramRoute.snapshot.params['id'];
 
         this.apiService.setLoggedIn(this.userId).subscribe((data: any) => {
-            console.log(data);
             if (data.status === 200 || data.status === '200') {
                 sessionStorage.setItem('isLoggedIn', '1');
 
@@ -43,7 +41,6 @@ export class InstructionsComponent implements OnInit {
         });
 
         this.apiService.fetchCandidateDetails(this.userId).subscribe((data: any) => {
-            // console.log(data.data);
             if (data.status === 200 || data.status === '200') {
                 this.userData.name = data.data[0].fname + ' ' + data.data[0].lname;
                 this.userData.class = data.data[0].classes;
@@ -59,9 +56,7 @@ export class InstructionsComponent implements OnInit {
     }
 
     startExam() {
-        console.log('logged in worked');
         this.apiService.checkStartExam(this.userId).subscribe((data: any) => {
-            console.log(data.data);
             if (data.status === 200 || data.status === '200') {
                 if (data.data[0].allow_exam === 1) {
                     this.router.navigate(['/dashboard']);
